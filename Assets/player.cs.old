@@ -1,0 +1,157 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class Player : MonoBehaviour {
+    public GameObject bullet;
+    public GameObject enemy;
+    public GameObject ExprosionParticle;
+    public AudioSource shot;
+    public AudioSource dead;
+
+    public float speed = 8;
+
+    public float minAngle = -30;
+    public float maxAngle = 30;
+    public float rotateSpeed = -1;
+    public int playerLife = 2;
+
+    public float Xscale = 0.5f;
+    public float Yscale = 0.5f;
+    public float Zscale = 0.5f;
+
+    private float blinkCount = 0;
+    private float invisible = 0;
+    private bool onDamage = false;
+    private bool clearFlag = false;
+    private float clearTime = 0;
+    private float deadMotion = 0;
+    // Use this for initialization
+    void Start() {
+
+    }
+
+    void moveClamp()
+    {
+        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+        Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+
+        Vector2 playerPosition = transform.position;
+        playerPosition.x = Mathf.Clamp(playerPosition.x, min.x, max.x);
+        transform.position = playerPosition;
+    }
+
+    // Update is called once per frame
+    void Update() {
+        //moveClamp();
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        worldMousePos.y = 0;
+        worldMousePos.z = 0;
+        transform.position = worldMousePos;
+
+        //操作
+        if (playerLife > 0)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                shot.Play();
+                Instantiate(bullet, transform.position, transform.rotation);
+            }
+        /*
+            float dx = Input.GetAxisRaw("Horizontal");
+            // float dy = Input.GetAxisRaw("Vertical");
+            Vector2 playerMove = new Vector2(dx, 0).normalized;
+
+            GetComponent<Rigidbody2D>().velocity = playerMove * speed;
+
+            //0～360を-180～180に変換
+            //?演算子でY回転が180度より大きいとき、現在の値から-360した値を代入
+            float rotateY = (transform.eulerAngles.y > 180) ? transform.eulerAngles.y - 360 : transform.eulerAngles.y;
+            //Y軸の回転範囲を指定
+            float angleY = Mathf.Clamp(rotateY + dx * rotateSpeed, minAngle, maxAngle);
+            //-180～180を0～360に戻す
+            angleY = (angleY < 0) ? angleY + 360 : angleY;
+            //いざ回転
+            transform.rotation = Quaternion.Euler(0, angleY, 0);
+            if (dx == 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+        */
+        }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        if (clearFlag == false) 
+        {
+            if (onDamage == false && (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("enemyBullet")))
+            {
+                onDamage = true;
+                playerLife -= 1;
+                if (playerLife <= 0)
+                {
+                    GetComponent<Rigidbody2D>().velocity=new Vector2(0,0);
+                    transform.localScale = new Vector3(Xscale -= 0.25f, Yscale += 1.5f, Zscale);
+                    dead.Play();
+
+                    Instantiate(ExprosionParticle, transform.position, transform.rotation);
+                }
+                
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
+        if (playerLife <= 0)
+        {
+
+            deadMotion += 1 * Time.deltaTime;
+            transform.localScale = new Vector3(Xscale += 1f * Time.deltaTime, Yscale -= 2f * Time.deltaTime, Zscale -= 0.5f * Time.deltaTime);
+        }
+        if (deadMotion >= 1f)
+        {
+            Destroy(this.gameObject);
+        }
+
+        if (enemyCount <= 0 && clearFlag == false)
+        {
+            clearTime += 1 * Time.deltaTime;
+            if (clearTime >= 3)
+            {
+                clearFlag = true;
+            }
+        }
+
+        if (onDamage == true)
+        {
+            blinkCount += 1 * Time.deltaTime;
+            invisible += 1 * Time.deltaTime;
+            /*
+            if (blinkCount<=0.1)
+            { 
+            GetComponent<Renderer>().material.SetColor("_EmissionColor",new Color(0f, 0f, 0f));
+            }
+            else if(0.1 <= blinkCount && blinkCount < 0.2)
+            {
+                GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1f, 1f, 1f));
+
+            }
+            else
+            {
+                blinkCount = 0;
+            }
+            */
+            if (invisible >= 1)
+            {
+                invisible = 0;
+                blinkCount = 0;
+                onDamage = false;
+            }
+        }
+    }
+
+}

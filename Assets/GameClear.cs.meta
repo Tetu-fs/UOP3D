@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2c4c9dd1b4a2fd34d93e24738a5c542b
+timeCreated: 1449642955
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - clearLabel: {fileID: 188508, guid: ece352d982d37ea42bc0119345c76c89, type: 2}
+  - gameOverLabel: {fileID: 155466, guid: ece352d982d37ea42bc0119345c76c89, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
