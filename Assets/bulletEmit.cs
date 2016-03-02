@@ -4,6 +4,7 @@ using System.Collections;
 public class bulletEmit : MonoBehaviour {
 
     public GameObject enemyBullet;
+    public GameObject TSD;
     public AudioSource hit;
 
     private Animator hitanima;
@@ -13,6 +14,7 @@ public class bulletEmit : MonoBehaviour {
     private float shakeTime = 0;
     // Use this for initialization
     void Start () {
+        TSD = GameObject.Find("TimeShotDeath(Clone)");
         nowPosition = transform.position;
         hitanima = GetComponent<Animator>();
     }
@@ -51,6 +53,7 @@ public class bulletEmit : MonoBehaviour {
             hitMove = true;
             }
             hit.Play();
+            TSD.SendMessage("yellowCounter");
             Instantiate(enemyBullet, transform.position, transform.rotation);
         }
     }

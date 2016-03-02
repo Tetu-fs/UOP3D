@@ -426,6 +426,8 @@ MonoBehaviour:
   enemy: {fileID: 146772, guid: 71ac5406e983ad642b86fc1f98252d45, type: 2}
   ExprosionParticle: {fileID: 133602, guid: 16600b94090d67243a1fe9ae7cd6217d, type: 2}
   canvas: {fileID: 0}
+  Line: {fileID: 0}
+  TimeShotDeath: {fileID: 0}
   shot: {fileID: 1271701886}
   dead: {fileID: 1062218834}
   speed: 8
@@ -1071,7 +1073,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22430322, guid: ca1abf62ed326974ea334c6a3b95618e, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 22430322, guid: ca1abf62ed326974ea334c6a3b95618e, type: 2}
       propertyPath: m_AnchoredPosition.x

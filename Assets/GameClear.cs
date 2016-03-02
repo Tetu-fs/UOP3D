@@ -7,9 +7,13 @@ public class GameClear : MonoBehaviour
 
     public GameObject clearLabel;
     public GameObject gameOverLabel;
+
+    public GameObject TitleLabel;
     public GameObject RetryLabel;
     public GameObject NextLabel;
+
     public GameObject enemyBullet;
+    public AudioSource ClearCountDown;
 
     public Text countLabel;
     public int clearCount = 3;
@@ -18,7 +22,7 @@ public class GameClear : MonoBehaviour
     private string titleScene = "TitleScene";
     private string clearScene = "gameclear";
     private bool bossFlag = false;
-
+    private bool calledSE = false;
     // Use this for initialization
     void Start()
     {
@@ -32,8 +36,9 @@ public class GameClear : MonoBehaviour
         {
             bossFlag = false;
         }
-
         countLabel.enabled = false;
+
+        TitleLabel.SetActive(false);
         clearLabel.SetActive(false);
         RetryLabel.SetActive(false);
         NextLabel.SetActive(false);
@@ -71,6 +76,11 @@ public class GameClear : MonoBehaviour
             {
                 if (enemyCount <= 0)
                 {
+                    if (calledSE == false)
+                    {
+                        ClearCountDown.Play();
+                        calledSE = true;
+                    }
                     countLabel.enabled = true;
                     clearTime += 1 * Time.deltaTime;
                     countLabel.text = "- " + count + " -";
@@ -84,8 +94,9 @@ public class GameClear : MonoBehaviour
                     if (clearCount == 0)
                     {
                         countLabel.enabled = false;
+                        TitleLabel.SetActive(true);
                         clearLabel.SetActive(true);
-                        RetryLabel.SetActive(true);
+                        RetryLabel.SetActive(false);
                         NextLabel.SetActive(true);
                     }
                 }
@@ -94,6 +105,11 @@ public class GameClear : MonoBehaviour
             {
                 if (bossCount <= 0)
                 {
+                    if (calledSE == false)
+                    {
+                        ClearCountDown.Play();
+                        calledSE = true;
+                    }
                     countLabel.enabled = true;
                     clearTime += 1 * Time.deltaTime;
                     countLabel.text = "- " + count + " -";
@@ -107,8 +123,9 @@ public class GameClear : MonoBehaviour
                     if (clearCount == 0)
                     {
                         countLabel.enabled = false;
+                        TitleLabel.SetActive(true);
                         clearLabel.SetActive(true);
-                        RetryLabel.SetActive(true);
+                        RetryLabel.SetActive(false);
                         NextLabel.SetActive(true);
                     }
                 }

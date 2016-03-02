@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177456}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: -3, z: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 1}
   m_LocalScale: {x: 1.9800001, y: 1.0000001, z: 0.005}
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,7 +77,7 @@ MonoBehaviour:
   bgm: {fileID: 189842, guid: 0371b917bebf19b49bdb192870b107e3, type: 2}
   stageManager: {fileID: 187016, guid: b0563f49e873e984c8995380d88a738d, type: 2}
   bgFx: {fileID: 184736, guid: 5a889e8477077f94b863ca070b8bdb05, type: 2}
-  TSD: {fileID: 185530, guid: 935ce5eed75160e4badb60e33369561c, type: 2}
+  TSD: {fileID: 157052, guid: 853f661c12057214399c22e24fed3ae1, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
