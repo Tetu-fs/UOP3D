@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyBullet: {fileID: 119324, guid: ce46d58db92ef234e9d07e4041297bf7, type: 2}
+  TSD: {fileID: 0}
   hit: {fileID: 8200936}
 --- !u!1001 &100100000
 Prefab:
@@ -257,6 +258,15 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bad555b2ee0a08b45bba29ff9501bd9e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_ProbeAnchor
+      value: 
+      objectReference: {fileID: 22490900, guid: 853f661c12057214399c22e24fed3ae1,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: TSD
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 141732}

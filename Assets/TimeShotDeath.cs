@@ -122,7 +122,11 @@ public class TimeShotDeath : MonoBehaviour {
                 }
                 else
                 {
-                    if (deathCount < 10)
+                  if (shotCount >= 500)
+                  {
+                      degree.text = shot500;
+                  }
+                  else if (deathCount < 10)
                     {
                         degree.text = deathUnder10;
                     }
@@ -130,11 +134,7 @@ public class TimeShotDeath : MonoBehaviour {
                     {
                         degree.text = Death100;
                     }
-                    else if (shotCount >= 500)
-                    {
-                        degree.text = shot500;
-                    }
-                }
+              }
             }
             degree.gameObject.SetActive(true);
 
@@ -145,7 +145,7 @@ public class TimeShotDeath : MonoBehaviour {
             Shot.gameObject.SetActive(false);
             Death.gameObject.SetActive(false);
         }
-       
+
     }
 
     void FixedUpdate()
